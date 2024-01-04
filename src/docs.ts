@@ -55,5 +55,5 @@ const value = await readSSROnlySecret(ssrOnlySecret)
  * @internal
  */
 export const _ = undefined;
-export * from "./ssr";
-export * from "./rsc";
+export * from "./ssr.js";
+export * from "./rsc.js";

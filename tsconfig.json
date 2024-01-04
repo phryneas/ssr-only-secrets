@@ -9,6 +9,8 @@
     "declarationMap": true,
     "target": "ES2022",
     "removeComments": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "types": ["react/canary", "node"]
   }
 }

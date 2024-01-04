@@ -1,5 +1,5 @@
-import { experimental_taintUniqueValue, use } from "react";
-import { getEncryptionKey, serialize } from "./shared";
+import { experimental_taintUniqueValue } from "react";
+import { getEncryptionKey, serialize } from "./shared.js";
 
 declare module "react" {
   type TypedArray =

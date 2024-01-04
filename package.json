@@ -1,10 +1,11 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/docs.d.ts",
       "react-server": {
         "default": "./dist/rsc.js"
       },

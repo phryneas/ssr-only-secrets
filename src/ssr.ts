@@ -1,5 +1,5 @@
 import { wrap } from "optimism";
-import { deserialize, getEncryptionKey } from "./shared";
+import { deserialize, getEncryptionKey } from "./shared.js";
 import { use } from "react";
 
 /**
