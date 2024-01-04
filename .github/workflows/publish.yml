@@ -18,7 +18,6 @@ jobs:
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
       - run: yarn install --immutable --mode=skip-build
-      - run: yarn workspace @apollo/experimental-nextjs-app-support run build
-      - run: yarn workspace @apollo/experimental-nextjs-app-support exec npm publish --access public  --provenance
+      - run: npm publish --access public  --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
