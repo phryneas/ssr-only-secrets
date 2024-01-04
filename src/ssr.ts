@@ -59,7 +59,7 @@ const memoizedReadSSROnlySecret = wrap(readSSROnlySecret, {
  * @public
  */
 export function useSSROnlySecret(
-  cloakedSecret: string,
+  cloakedSecret: string | undefined,
   encryptionEnvVarName: string
 ): string | undefined {
   const promise = memoizedReadSSROnlySecret(

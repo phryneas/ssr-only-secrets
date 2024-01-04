@@ -1,24 +1,22 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
+  "main": "dist/types.cjs",
   "exports": {
     ".": {
-      "react-server": {
-        "import": "./dist/rsc.js",
-        "require": "./dist/rsc.cjs"
+      "require": {
+        "react-server": "./dist/rsc.cjs",
+        "node": "./dist/ssr.cjs",
+        "default": "./dist/browser.cjs"
       },
-      "browser": {
-        "import": "./dist/browser.js",
-        "require": "./dist/browser.cjs"
-      },
-      "node": {
-        "import": "./dist/ssr.js",
-        "require": "./dist/ssr.cjs"
+      "import": {
+        "react-server": "./dist/rsc.js",
+        "node": "./dist/ssr.js",
+        "default": "./dist/browser.js"
       }
-    },
-    "./package.json": "./package.json"
+    }
   },
   "repository": {
     "type": "git",

@@ -13,14 +13,14 @@ Only available in Client Components.
 **Signature:**
 
 ```typescript
-export declare function useSSROnlySecret(cloakedSecret: string, encryptionEnvVarName: string): string | undefined;
+export declare function useSSROnlySecret(cloakedSecret: string | undefined, encryptionEnvVarName: string): string | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cloakedSecret | string |  |
+|  cloakedSecret | string \| undefined |  |
 |  encryptionEnvVarName | string |  |
 
 **Returns:**
