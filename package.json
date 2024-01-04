@@ -1,6 +1,6 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
   "exports": {
@@ -39,6 +39,7 @@
     "build:clean": "rimraf dist;",
     "build:build": "tsc",
     "build:docs": "api-extractor run; api-documenter markdown --input-folder temp --output-folder docs",
-    "build:readme": "sed 's@(./@(./docs/@' docs/ssr-only-secrets.md > README.md"
+    "build:readme": "sed 's@(./@(./docs/@' docs/ssr-only-secrets.md > README.md",
+    "prepare": "yarn build"
   }
 }
