@@ -1,4 +1,4 @@
-name: Clean up Prettier, Size-limit, and Api-Extractor
+name: Build docs
 
 on:
   push:
