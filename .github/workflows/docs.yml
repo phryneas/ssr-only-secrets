@@ -33,3 +33,8 @@ jobs:
           commit_message: "Update Docs"
           push_options: ""
           skip_dirty_check: false
+
+      - name: Deploy to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "docs"
