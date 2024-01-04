@@ -15,7 +15,10 @@
     },
     "./package.json": "./package.json"
   },
-  "repository": "https://github.com/phryneas/ssr-only-secrets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phryneas/ssr-only-secrets.git"
+  },
   "author": "Lenz Weber-Tronic",
   "license": "MIT",
   "dependencies": {
@@ -41,5 +44,10 @@
     "build:docs": "api-extractor run; api-documenter markdown --input-folder temp --output-folder docs",
     "build:readme": "sed 's@(./@(https://github.com/phryneas/ssr-only-secrets/blob/main/docs/@' docs/ssr-only-secrets.md > README.md",
     "prepare": "yarn build"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }
