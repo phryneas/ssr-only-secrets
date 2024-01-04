@@ -1,6 +1,6 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
   "exports": {
@@ -22,8 +22,7 @@
   "author": "Lenz Weber-Tronic",
   "license": "MIT",
   "dependencies": {
-    "optimism": "^0.17.5",
-    "tsup": "^8.0.1"
+    "optimism": "^0.17.5"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.23.16",
@@ -31,8 +30,8 @@
     "@tsconfig/recommended": "^1.0.3",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
-    "typescript": "^5.3.3",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "react": "^18"
