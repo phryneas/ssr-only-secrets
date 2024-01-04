@@ -39,7 +39,7 @@
     "build:clean": "rimraf dist;",
     "build:build": "tsc",
     "build:docs": "api-extractor run; api-documenter markdown --input-folder temp --output-folder docs",
-    "build:readme": "sed 's@(./@(./docs/@' docs/ssr-only-secrets.md > README.md",
+    "build:readme": "sed 's@(./@(https://github.com/phryneas/ssr-only-secrets/blob/main/docs/@' docs/ssr-only-secrets.md > README.md",
     "prepare": "yarn build"
   }
 }
