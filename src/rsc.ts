@@ -14,11 +14,13 @@ declare module "react" {
     | Float64Array
     | BigInt64Array
     | BigUint64Array;
-  export const experimental_taintUniqueValue: (
-    message: string,
-    lifetime: object,
-    value: string | bigint | TypedArray
-  ) => void;
+  export const experimental_taintUniqueValue:
+    | undefined
+    | ((
+        message: string,
+        lifetime: object,
+        value: string | bigint | TypedArray
+      ) => void);
 }
 
 /**
@@ -36,11 +38,13 @@ export async function cloakSSROnlySecret(
   secret: string,
   encryptionEnvVarName: string
 ) {
-  experimental_taintUniqueValue(
-    `Do not pass the content of the envrionment variable "${encryptionEnvVarName}" directly into client component props. This is unsafe!`,
-    process,
-    secret
-  );
+  if (experimental_taintUniqueValue) {
+    experimental_taintUniqueValue(
+      `Do not pass the content of the envrionment variable "${encryptionEnvVarName}" directly into client component props. This is unsafe!`,
+      process,
+      secret
+    );
+  }
 
   const key = await getEncryptionKey(encryptionEnvVarName);
   const encoded = new TextEncoder().encode(secret);

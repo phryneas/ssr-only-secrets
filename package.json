@@ -16,6 +16,13 @@
     },
     "./package.json": "./package.json"
   },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/docs.d.ts"
+      ]
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phryneas/ssr-only-secrets.git"
