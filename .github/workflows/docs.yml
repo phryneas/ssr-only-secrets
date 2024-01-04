@@ -1,0 +1,31 @@
+name: Clean up Prettier, Size-limit, and Api-Extractor
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: "yarn"
+
+      - run: yarn install --immutable
+
+      - name: Run build
+        run: yarn build
+
+      - name: Commit changes back
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update Docs"
+          push_options: ""
+          skip_dirty_check: false

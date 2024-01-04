@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "declarationMap": true,
+    "target": "ES2022",
+    "removeComments": false,
+    "types": ["react/canary", "node"]
+  }
+}

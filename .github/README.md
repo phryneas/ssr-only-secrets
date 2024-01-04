@@ -1,0 +1,1 @@
+../docs/ssr-only-secrets.md
