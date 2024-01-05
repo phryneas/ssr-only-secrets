@@ -26,10 +26,10 @@ crypto.subtle
   .then(JSON.stringify)
   .then(console.log);
 ```
- * and store the result in an environment variable, e.g. `SECRET_KEY`, e.g. by 
+ * and store the result in an environment variable, e.g. `SECRET_KEY_VAR`, e.g. by 
  * writing it into your `.env.local`.
 ```env
-SECRET_KEY={"alg":"A256CBC","ext":true,"k":"...","key_ops":["encrypt","decrypt"],"kty":"oct"}
+SECRET_KEY_VAR={"alg":"A256CBC","ext":true,"k":"...","key_ops":["encrypt","decrypt"],"kty":"oct"}
 ```
  *
  * Now, you can pass "cloaked secrets" from your Server Components into the
@@ -43,14 +43,14 @@ import { cloakSSROnlySecret } from "ssr-only-secrets";
 
 const MyServerComponent = () => {
     const secretValue = "my secret value"
-    return <ClientComponent ssrOnlySecret={cloakSSROnlySecret(secretValue, "SECRET_KEY")} />
+    return <ClientComponent ssrOnlySecret={cloakSSROnlySecret(secretValue, "SECRET_KEY_VAR")} />
 }
 ```
  * And in a Client Component
 ```jsx
 import { useSSROnlySecret } from "ssr-only-secrets";
 
-const ClientComponent = ({ssrOnlySecret}, "SECRET_KEY") => {
+const ClientComponent = ({ssrOnlySecret}, "SECRET_KEY_VAR") => {
     const value = useSSROnlySecret(ssrOnlySecret);
     console.log(value); // during SSR, this logs "my secret value", but in the browser, it logs "undefined"
 }
