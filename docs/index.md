@@ -27,9 +27,9 @@ crypto.subtle
   .then(JSON.stringify)
   .then(console.log);
 ```
-<p>and store the result in an environment variable, e.g. <code>SECRET_KEY</code>, e.g. by writing it into your <code>.env.local</code>.</p>
+<p>and store the result in an environment variable, e.g. <code>SECRET_KEY_VAR</code>, e.g. by writing it into your <code>.env.local</code>.</p>
 ```env
-SECRET_KEY={"alg":"A256CBC","ext":true,"k":"...","key_ops":["encrypt","decrypt"],"kty":"oct"}
+SECRET_KEY_VAR={"alg":"A256CBC","ext":true,"k":"...","key_ops":["encrypt","decrypt"],"kty":"oct"}
 ```
 <p>Now, you can pass "cloaked secrets" from your Server Components into the SSR-run of your Client Components, without them being accessible in your Client Components in the browser.</p> |
 
