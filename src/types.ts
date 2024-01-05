@@ -2,9 +2,15 @@
  * This package provides a way to pass secrets from Server Components into the
  * SSR-run of Client Components without them being accessible in the browser.
  * 
- * @remarks
- * Usage:
+ * This technique was inspired by {@link https://github.com/apollographql/apollo-client-nextjs/issues/85#issuecomment-1753442277 | this comment} by {@link https://github.com/Stevemoretz | @Stevemoretz}.
+ * 
+ * <h2>Usage:</h2>
  *
+ * Install the package
+```sh
+npm i ssr-only-secrets
+```
+ * 
  * Generate a jwk-formatted AES-CBC key, e.g. by running
 ```js
 crypto.subtle
@@ -33,6 +39,8 @@ SECRET_KEY={"alg":"A256CBC","ext":true,"k":"...","key_ops":["encrypt","decrypt"]
  * @example
  * In a Server Component:
 ```jsx
+import { cloakSSROnlySecret } from "ssr-only-secrets";
+
 const MyServerComponent = () => {
     const secretValue = "my secret value"
     return <ClientComponent ssrOnlySecret={cloakSSROnlySecret(secretValue, "SECRET_KEY")} />
@@ -40,7 +48,9 @@ const MyServerComponent = () => {
 ```
  * And in a Client Component
 ```jsx
-const ClientComponent = ({ssrOnlySecret}) => {
+import { useSSROnlySecret } from "ssr-only-secrets";
+
+const ClientComponent = ({ssrOnlySecret}, "SECRET_KEY") => {
     const value = useSSROnlySecret(ssrOnlySecret);
     console.log(value); // during SSR, this logs "my secret value", but in the browser, it logs "undefined"
 }
