@@ -35,7 +35,7 @@ jobs:
           skip_dirty_check: false
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "docs"
   deploy:
