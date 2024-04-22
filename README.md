@@ -51,8 +51,8 @@ And in a Client Component
 ```jsx
 import { useSSROnlySecret } from "ssr-only-secrets";
 
-const ClientComponent = ({ssrOnlySecret}) => {
-    const value = useSSROnlySecret(ssrOnlySecret, "SECRET_KEY_VAR");
+const ClientComponent = ({ssrOnlySecret}, "SECRET_KEY_VAR") => {
+    const value = useSSROnlySecret(ssrOnlySecret);
     console.log(value); // during SSR, this logs "my secret value", but in the browser, it logs "undefined"
 }
 ```
