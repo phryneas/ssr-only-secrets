@@ -1,17 +1,19 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
   "main": "dist/types.cjs",
   "exports": {
     ".": {
       "require": {
+        "types": "./dist/types.d.cts",
         "react-server": "./dist/rsc.cjs",
         "node": "./dist/ssr.cjs",
         "default": "./dist/browser.cjs"
       },
       "import": {
+        "types": "./dist/types.d.ts",
         "react-server": "./dist/rsc.js",
         "node": "./dist/ssr.js",
         "default": "./dist/browser.js"
@@ -41,7 +43,7 @@
     "react": "^18"
   },
   "scripts": {
-    "build": "yarn build:build && yarn build:docs && yarn build:readme",
+    "build": "yarn build:build && yarn publint && yarn build:docs && yarn build:readme",
     "build:build": "tsup",
     "build:docs": "rimraf temp; tsc; api-extractor run; api-documenter markdown --input-folder temp --output-folder docs",
     "build:readme": "sed -n -e 's@(./@(https://github.com/phryneas/ssr-only-secrets/blob/main/docs/@' -e 's/^#\\(#.*\\) package/\\1/'  -e '/^#/,$p'  docs/ssr-only-secrets.md > README.md",
