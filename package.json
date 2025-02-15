@@ -1,6 +1,6 @@
 {
   "name": "ssr-only-secrets",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "This package provides a way to pass secrets from Server Components into the SSR-run of Client Components, without them being accessible in the browser.",
   "type": "module",
   "main": "dist/types.cjs",
