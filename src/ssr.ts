@@ -1,6 +1,6 @@
 import { wrap } from "optimism";
 import { deserialize, getEncryptionKey } from "./shared.js";
-import { use } from "react";
+import { use, useRef } from "react";
 
 /**
  * Decrypts a secret that was created in a Server Component using
@@ -16,6 +16,19 @@ export async function readSSROnlySecret(
   cloakedSecret: string | undefined,
   encryptionEnvVarName: string
 ): Promise<string | undefined> {
+  setTimeout(
+    // To prevent the `memoizedReadSSROnlySecret` cache from growing too large,
+    // we evict the memoization cache entry after 3 seconds.
+    // This should be enough for React to mount the component and finish rendering,
+    // but not too long to keep the cache from growing indefinitely.
+    // There might be edge case situations where the component tree stays suspended
+    // for longer than five seconds, in which case the cache entry will be evicted
+    // before the component is mounted, and the work has to be done again - but
+    // this should be rare and a reasonable tradeoff.
+    () => memoizedReadSSROnlySecret.forget(cloakedSecret, encryptionEnvVarName),
+    5000
+  );
+
   if (cloakedSecret == undefined) {
     return undefined;
   }
@@ -44,7 +57,7 @@ export async function readSSROnlySecret(
  */
 const memoizedReadSSROnlySecret = wrap(readSSROnlySecret, {
   max: 10000,
-}) as any as typeof readSSROnlySecret;
+});
 
 /**
  * Decrypts a secret that was created in a Server Component using
@@ -62,9 +75,16 @@ export function useSSROnlySecret(
   cloakedSecret: string | undefined,
   encryptionEnvVarName: string
 ): string | undefined {
-  const promise = memoizedReadSSROnlySecret(
-    cloakedSecret,
-    encryptionEnvVarName
-  );
-  return use(promise);
+  // Store the promiseRef in a ref.
+  // This won't do anything meaningful during SSR, but it will
+  // ensure that the promise is never recreated in the browser,
+  // even if it is collected from the memoization cache.
+  const promiseRef = useRef<Promise<string | undefined>>();
+  if (!promiseRef.current) {
+    promiseRef.current = memoizedReadSSROnlySecret(
+      cloakedSecret,
+      encryptionEnvVarName
+    );
+  }
+  return use(promiseRef.current);
 }
