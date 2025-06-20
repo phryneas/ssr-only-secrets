@@ -33,6 +33,12 @@ export function getEncryptionKey(envVarName: string): Promise<CryptoKey> {
 
 export function serialize(crypt: ArrayBuffer, iv: Uint8Array) {
   return (
+    // As we evict handled values from the memoization cache after the first mount,
+    // we need to make sure that two different renders never return the same promise,
+    // even if they have the same value and secret.
+    // To achieve this, we use a random UUID as a prefix. It will be ignored on deserialization.
+    crypto.randomUUID() +
+    ":" +
     Buffer.from(crypt).toString("base64") +
     ":" +
     Buffer.from(iv).toString("base64")
@@ -40,7 +46,7 @@ export function serialize(crypt: ArrayBuffer, iv: Uint8Array) {
 }
 
 export function deserialize(serialized: string) {
-  const [crypt, iv] = serialized.split(":");
+  const [_, crypt, iv] = serialized.split(":");
   return [
     Buffer.from(crypt, "base64"),
     Uint8Array.from(Buffer.from(iv, "base64")),
