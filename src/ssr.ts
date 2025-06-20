@@ -18,7 +18,7 @@ export async function readSSROnlySecret(
 ): Promise<string | undefined> {
   setTimeout(
     // To prevent the `memoizedReadSSROnlySecret` cache from growing too large,
-    // we evict the memoization cache entry after 3 seconds.
+    // we evict the memoization cache entry after 5 seconds.
     // This should be enough for React to mount the component and finish rendering,
     // but not too long to keep the cache from growing indefinitely.
     // There might be edge case situations where the component tree stays suspended
